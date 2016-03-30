@@ -52,7 +52,7 @@ tcp_state="SYN_RECV\|TIME_WAIT\|LAST_ACK\|CLOSE_WAIT"
  21    | 71.43.188.26    |   US, FL, Florida, Oviedo, 32765, 28.676600, -81.199097, 534, 407                                                                                     
 
  Total unique IPs: 1055  Total connections: 1307
- Filter applied: IP addresses with more than 2 connections.
+ Filter applied: IP addresses with more than 3 connections.
 
  TOTAL   TCP STATE    PERCENTAGE 
                                 
@@ -84,7 +84,7 @@ tcp_state="SYN_RECV\|TIME_WAIT\|LAST_ACK\|CLOSE_WAIT"
  Total unique IPs: 20  Total connections: 25
 
  Ports used: 80 443 22 
- Filter applied: IP addresses with more than 2 connections and tcp state SYN_RECV.
+ Filter applied: IP addresses with more than 1 connection and tcp state SYN_RECV.
 
  All netstat outputs are located in /tmp/viewDOS.2014_03_21-01_10_58.txt
 
