@@ -40,18 +40,19 @@ tcp_state="SYN_RECV\|TIME_WAIT\|LAST_ACK\|CLOSE_WAIT"
 **Output viewDOS**
 ```sh
  TIMES     IP SOURCE        GEO - INFORMATION      
- 3     | 95.211.225.139  |   NL, 07, Noord-Holland, N/A, N/A, 52.349998, 4.916700, 0, 0                                                                                          
- 4     | 122.144.130.4   |   CN, 23, Shanghai, Shanghai, N/A, 31.045601, 121.399696, 0, 0                                                                                        
- 4     | 45.55.232.1     |   US, NY, New York, New York, 10118, 40.714298, -74.005997, 501, 212                                                                                  
- 4     | 80.110.68.170   |   AT, 09, Wien, Vienna, 1100, 48.152100, 16.387800, 0, 0                                                                                              
+ 3     | 95.211.225.139  |   NL, 07, Noord-Holland, N/A, N/A, 52.349998, 4.916700, 0, 0
+ 4     | 122.144.130.4   |   CN, 23, Shanghai, Shanghai, N/A, 31.045601, 121.399696, 0, 0
+ 4     | 45.55.232.1     |   US, NY, New York, New York, 10118, 40.714298, -74.005997, 501, 212                               
+ 4     | 80.110.68.170   |   AT, 09, Wien, Vienna, 1100, 48.152100, 16.387800, 0, 0                                           
  ...
- 5     | 88.72.110.58    |   DE, 02, Bayern, Obertraubling, 93083, 48.971298, 12.175000, 0, 0                                                                                    
- 6     | 123.252.131.212 |   IN, 16, Maharashtra, Bandra, 360330, 19.049999, 72.833298, 0, 0                                                                                     
- 6     | 147.30.236.76   |   KZ, 16, North Kazakhstan, Petropavlovsk, N/A, 54.872799, 69.142998, 0, 0                                                                            
- 7     | 207.233.90.1    |   US, CA, California, Palmdale, 93550, 34.520000, -118.083504, 803, 661                                                                               
+ 5     | 88.72.110.58    |   DE, 02, Bayern, Obertraubling, 93083, 48.971298, 12.175000, 0, 0                                 
+ 6     | 123.252.131.212 |   IN, 16, Maharashtra, Bandra, 360330, 19.049999, 72.833298, 0, 0                                  
+ 6     | 147.30.236.76   |   KZ, 16, North Kazakhstan, Petropavlovsk, N/A, 54.872799, 69.142998, 0, 0                         
+ 7     | 207.233.90.1    |   US, CA, California, Palmdale, 93550, 34.520000, -118.083504, 803, 661                            
  21    | 71.43.188.26    |   US, FL, Florida, Oviedo, 32765, 28.676600, -81.199097, 534, 407                                                                                     
 
  Total unique IPs: 1055  Total connections: 1307
+ Filter applied: IP addresses with more than 2 connections.
 
  TOTAL   TCP STATE    PERCENTAGE 
                                 
@@ -68,21 +69,23 @@ tcp_state="SYN_RECV\|TIME_WAIT\|LAST_ACK\|CLOSE_WAIT"
 
  TIMES     IP SOURCE        GEO - INFORMATION          
                                                          
- 1     | 123.252.131.212 |   IN, 16, Maharashtra, Bandra, 360330, 19.049999, 72.833298, 0, 0                                                                                     
- 1     | 130.157.101.141 |   US, CA, California, Rohnert Park, 94928, 38.343300, -122.704102, 807, 707                                                                           
- 1     | 130.226.254.66  |   DK, 19, Nordjylland, Ålborg, 9000, 57.048000, 9.918700, 0, 0                                                                                       
- 1     | 163.180.118.60  |   KR, 13, Kyonggi-do, Suwon, N/A, 37.291100, 127.008904, 0, 0                                                                                         
- 1     | 178.62.250.138  |   NL, 07, Noord-Holland, Amsterdam, 1000, 52.374001, 4.889700, 0, 0                                                                                   
- 1     | 216.46.148.192  |   CA, ON, Ontario, Grand Bend, N/A, 43.316700, -81.750000, 0, 0                                                                                       
+ 1     | 123.252.131.212 |   IN, 16, Maharashtra, Bandra, 360330, 19.049999, 72.833298, 0, 0                                  
+ 1     | 130.157.101.141 |   US, CA, California, Rohnert Park, 94928, 38.343300, -122.704102, 807, 707                        
+ 1     | 130.226.254.66  |   DK, 19, Nordjylland, Ålborg, 9000, 57.048000, 9.918700, 0, 0                                     
+ 1     | 163.180.118.60  |   KR, 13, Kyonggi-do, Suwon, N/A, 37.291100, 127.008904, 0, 0                                      
+ 1     | 178.62.250.138  |   NL, 07, Noord-Holland, Amsterdam, 1000, 52.374001, 4.889700, 0, 0                                
+ 1     | 216.46.148.192  |   CA, ON, Ontario, Grand Bend, N/A, 43.316700, -81.750000, 0, 0                                    
  ...
- 1     | 95.56.142.184   |   KZ, 02, Almaty City, Almaty, N/A, 43.256500, 76.928497, 0, 0                                                                                        
- 2     | 207.47.199.35   |   CA, SK, Saskatchewan, Regina, S4P, 50.418999, -104.677399, 0, 0                                                                                     
- 3     | 10.3.176.41     |   IP Address not found                                                                                                                                
+ 1     | 95.56.142.184   |   KZ, 02, Almaty City, Almaty, N/A, 43.256500, 76.928497, 0, 0                                     
+ 2     | 207.47.199.35   |   CA, SK, Saskatchewan, Regina, S4P, 50.418999, -104.677399, 0, 0                                  
+ 3     | 10.3.176.41     |   IP Address not found                                                                             
  3     | 86.57.158.178   |   BY, 04, Minsk, Minsk, N/A, 53.900002, 27.566700, 0, 0                                                                                               
 
  Total unique IPs: 20  Total connections: 25
 
- Ports used: 80 443 65535 33445
+ Ports used: 80 443 22 
+ Filter applied: IP addresses with more than 2 connections and tcp state SYN_RECV.
+
  All netstat outputs are located in /tmp/viewDOS.2014_03_21-01_10_58.txt
 
  SSH connections to 4 Hosts has delayed 16 seconds.
