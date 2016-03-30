@@ -1,5 +1,7 @@
 # viewDOS
-Simple shellscript to quickly generate an ordered list of all IPs connected to multiple servers in X ports, showing the amount of connections detailed with geolocation. It is intended to quickly get a report of suspicious IP addresses of several clusters under different types of DOS attacks. It just connects by SSH to different servers and uses netstat to obtain the desired information.
+Simple shellscript to quickly generate an ordered list of all IPs connected to multiple servers in X ports, showing the amount of connections detailed with geolocation. 
+
+It is intended to quickly get a report of suspicious IP addresses of several clusters under different types of DOS attacks. It just connects by SSH to different servers and uses netstat to obtain the desired information.
 
 **Options**.
 
@@ -32,7 +34,7 @@ netstat_cmd="netstat -ptun"
 geoip_cmd="geoiplookup"     
 
 # state TCP connections (FIN_WAIT2, SYN_RECV, UNKNOW, etc.)
-tcp_state="SYN_RECV\|TIME_WAIT\|LAST_ACK\|CLOSE_WAIT"
+tcp_state="SYN_RECV"
 # Multiple TCP states example: tcp_state="SYN_RECV\|TIME_WAIT\|CLOSE_WAIT".
 # Multiple TCP states with separate output, check line 132.
 ```
@@ -69,9 +71,6 @@ tcp_state="SYN_RECV\|TIME_WAIT\|LAST_ACK\|CLOSE_WAIT"
 
  TIMES     IP SOURCE        GEO - INFORMATION          
                                                          
- 1     | 123.252.131.212 |   IN, 16, Maharashtra, Bandra, 360330, 19.049999, 72.833298, 0, 0                                  
- 1     | 130.157.101.141 |   US, CA, California, Rohnert Park, 94928, 38.343300, -122.704102, 807, 707                        
- 1     | 130.226.254.66  |   DK, 19, Nordjylland, Ålborg, 9000, 57.048000, 9.918700, 0, 0                                     
  1     | 163.180.118.60  |   KR, 13, Kyonggi-do, Suwon, N/A, 37.291100, 127.008904, 0, 0                                      
  1     | 178.62.250.138  |   NL, 07, Noord-Holland, Amsterdam, 1000, 52.374001, 4.889700, 0, 0                                
  1     | 216.46.148.192  |   CA, ON, Ontario, Grand Bend, N/A, 43.316700, -81.750000, 0, 0                                    
