@@ -43,6 +43,14 @@ tcp_state="SYN_RECV"
 # Multiple TCP states with separate output, check line 132.
 ```
 
+**Add hosts to viewDOS**: Edit Hosts section of the script. (Example with four hosts)
+```sh
+ssh user2@domain0.com "$netstat_cmd" >> $file_tmp
+ssh -p 222 root@domain1.com "$netstat_cmd" >> $file_tmp
+ssh -i /opt/keys/id_rsa root@domain2.com "$netstat_cmd" >> $file_tmp
+ssh -o "StrictHostKeyChecking no" -p 2211 root@domain3.com "$netstat_cmd" >> $file_tmpmp
+```
+
 **Sample viewDOS output**.
 ```sh
  TIMES     IP SOURCE        GEO - INFORMATION      
