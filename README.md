@@ -3,7 +3,11 @@ Simple shellscript to quickly generate an ordered list of all IPs connected to m
 
 It is intended to quickly get a report of suspicious IP addresses of several clusters under different types of DOS attacks. It just connects by SSH to different servers and uses netstat to obtain the desired information.
 
-**Options**.
+**Dependency** (optional but recommended).
+
+Command geoiplookup / [geoip-bin] (http://dev.maxmind.com/geoip/geoip2/geolite2/ "MaxMind’s GeoIP2 databases.")
+
+**viewDOS configuration options**.
 
 ```sh
 # Temporary file name.
@@ -39,7 +43,7 @@ tcp_state="SYN_RECV"
 # Multiple TCP states with separate output, check line 132.
 ```
 
-**Output viewDOS**
+**Sample viewDOS output**.
 ```sh
  TIMES     IP SOURCE        GEO - INFORMATION      
  3     | 95.211.225.139  |   NL, 07, Noord-Holland, N/A, N/A, 52.349998, 4.916700, 0, 0
