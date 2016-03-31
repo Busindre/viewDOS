@@ -17,7 +17,7 @@
 ############################ Configuration ##################################
 
 file_tmp="/tmp/viewDOS.$(date +%Y_%m_%d-%H_%M_%S).txt" # Temporary file
-ports=":80 \|:443"                     		       # Filter IPs using any of the defined tcp/udp ports.
+ports=":80 \|:443"                     		       # Filter IPs using any of the defined tcp/udp ports. Only UDP connections (ports="udp")
 ignoreip="127.0.0.1\|localhost"          	       # IPs that will be ignored and will not be counted (whitelist)
 
 red=5                       # Red mark on hosts that have more than X connections.
