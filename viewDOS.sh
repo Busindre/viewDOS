@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #############################################################################
 #
@@ -8,7 +8,9 @@
 # suspicious IP addresses of several clusters under different types of DOS
 # attacks. It just connects by SSH to different servers and uses netstat to
 # obtain the desired information, as the ports and options defined in the
-# script.
+# script. ViewDOS only shows connections, no Bandwidth !.
+#
+# IP - Bandwidth Tools: iptraf, iftop, tcptrack, trafshow, pktstat, etc...
 #
 ################################ Links ######################################
 #
@@ -17,10 +19,10 @@
 ############################ Configuration ##################################
 
 file_tmp="/tmp/viewDOS.$(date +%Y_%m_%d-%H_%M_%S).txt" # Temporary file
-ports=":80 \|:443"                     		       # Filter IPs using any of the defined tcp/udp ports. Only UDP connections (ports="udp")
-ignoreip="127.0.0.1\|localhost"          	       # IPs that will be ignored and will not be counted (whitelist)
+ports=":80 \|:443"                     		       # Filter IPs using any of the defined tcp/udp ports. Only UDP connections (ports="udp").
+ignoreip="127.0.0.1\|localhost"          	       # IPs that will be ignored and will not be counted (whitelist) / Type "NO_filter" if you do not want to ignore any IP.
 
-red=5                       # Red mark on hosts that have more than X connections.
+red=10                      # Red mark on hosts that have more than X connections.
 red_tcp_state=2		    # Red mark on hosts that have more than X tcp connections to a particular state.
 
 min_conn=0		    # Show only IPs that have more than X connections. (NO effect on IPs / TCP States counters).
@@ -32,7 +34,7 @@ geoip_cmd="geoiplookup"     # Command geolocation + options, necessary to displa
 tcp_state="SYN_RECV"  # tcp_state="SYN_RECV\|TIME_WAIT\|LAST_ACK\|CLOSE_WAIT"
 		      # state TCP connections (FIN_WAIT2, SYN_RECV, UNKNOW, etc.)
                       # Multiple TCP states example: tcp_state="SYN_RECV\|TIME_WAIT\|CLOSE_WAIT".
-                      # Multiple TCP states with separate output, check line 132.
+                      # Multiple TCP states with separate output, check line 149.
 
 date=$(date)
 START=$(date +%s);
@@ -67,9 +69,12 @@ function global {
                 printf " %-5s | %-15s | %-150s\n" ${array[$i]} ${array[$i+1]} "$geoip"
           fi
 	fi
-          i=$((i+1))
+        i=$((i+1))
        done
        echo -e "\n Total unique IPs: $((arraylength / 2))  Total connections: $total_conni"
+       echo -e " IPs not included in the summation: $ignoreip" | sed -e s'/\\|/, /g'
+
+	
        }
 
 ###################################
@@ -98,7 +103,7 @@ fi
 END=$(date +%s);
 ssh_duration=$((END-START))
 
-times=$(grep "$ports" $file_tmp | grep -v "$ignoreip" | awk '{print $5}' | cut -d: -f1 | sort | uniq -c | sort -n)
+times=$(grep "$ports" $file_tmp | awk '{print $5}' | grep -v "$ignoreip" |cut -d: -f1 | sort | uniq -c | sort -n )
 
 array=($times)
 arraylength=${#array[@]}
@@ -109,23 +114,25 @@ fi
 
 global $array[@] 
 
+
 ###################################
-# Calculates TCP states totals
+# Calculates TCP states totals (All IPs)
 
 if [ "$min_conn" -ne 0 ];then
         echo " Filter applied: IP addresses with more than $min_conn connections."
 fi
 
-session_states=$(grep "$ports" $file_tmp | grep -v "$ignoreip" | awk '{print $6}' | cut -d: -f1 | sort | uniq -c | sort -n )
+session_states=$(grep "$ports" $file_tmp | awk '{print $6}' | cut -d: -f1 | sort | uniq -c | sort -n )
 array=($session_states)
 arraylength=${#array[@]}
 states_count $array[@]
+echo -e "\n Filter 'ignoreip' is not applied here, only 'ports'"
 
 ###################################
 # Calculate a list of IPs filtered by the TCP state defined in $ tcp_state and sorts the output.
 
 ## TCP state defined in the variable $tcp_state
-state=$(grep "$ports" $file_tmp | grep -v "$ignoreip" | grep $tcp_state | awk '{print $5}' | cut -d: -f1 | sort | uniq -c | sort -n)
+state=$(grep "$ports" $file_tmp | grep $tcp_state | awk '{print $5}' | grep -v "$ignoreip" | cut -d: -f1 | sort | uniq -c | sort -n)
 array=($state)
 arraylength=${#array[@]}
 total_conni=0
@@ -143,7 +150,7 @@ fi
 ## Just copy and edit the three lines with the tcp state name 
 
 ## CLOSE_WAIT
-#state=$(grep "$ports" $file_tmp | grep -v "$ignoreip" | grep "CLOSE_WAIT" | awk '{print $5}' | cut -d: -f1 | sort | uniq -c | sort -n)
+#state=$(grep "$ports" $file_tmp | grep "CLOSE_WAIT" | awk '{print $5}' | grep -v "$ignoreip" | cut -d: -f1 | sort | uniq -c | sort -n)
 #array=($state)
 #arraylength=${#array[@]}
 #total_conni=0
@@ -157,7 +164,7 @@ fi
 #fi
 
 ## FIN_WAIT1
-#state=$(grep "$ports" $file_tmp | grep -v "$ignoreip" | grep "FIN_WAIT1" | awk '{print $5}' | cut -d: -f1 | sort | uniq -c | sort -n)
+#state=$(grep "$ports" $file_tmp | grep "FIN_WAIT1" | awk '{print $5}' | grep -v "$ignoreip" | cut -d: -f1 | sort | uniq -c | sort -n)
 #array=($state)
 #arraylength=${#array[@]}
 #total_conni=0
@@ -182,13 +189,14 @@ fi
 
 
 echo -e " All netstat outputs are located in $file_tmp\n"
+echo -e " The filter 'ignoreip' is ignored in the section 'Total TCP states'."
 echo -e " SSH connections to `grep -i Address $file_tmp  | wc -l` Hosts has delayed $ssh_duration seconds."
 echo -e " Date of execution: $date \n"
 if [ -z "$geoip" ];then
 	echo -e " IP geolocation not possible, 'min_conn' value too large or geoiplookup command not installed / configured in $0\n"
 fi
 
-# Date: 24/03/2016 (Author: Busindre).
+# Date: 01/04/2016 (Author: Busindre).
 # Network Abuse: http://www.x-arf.org/index.html
 # How to report a DDOS attack: https://www.icann.org/news/blog/how-to-report-a-ddos-attack
 # DDoS attacks worldwide http://www.digitalattackmap.com/
