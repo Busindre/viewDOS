@@ -1,7 +1,7 @@
 # viewDOS
-Simple shellscript to quickly generate an ordered list of all IPs connected to multiple servers in X ports, showing the amount of connections detailed with geolocation. 
+Simple shellscript to quickly generate an ordered list of all IPs connected to multiple servers in X ports, showing the amount of connections detailed with geolocation. ViewDOS only shows connections and TCP states, no Bandwidth.
 
-It is intended to quickly get a report of suspicious IP addresses of several clusters under different types of DOS attacks. It just connects by SSH to different servers and uses netstat to obtain the desired information.
+It is intended to quickly get a report of suspicious IP addresses of several clusters under different types of DOS attacks. It just connects by SSH to different servers and uses netstat to obtain the desired information. You can filter by IP, port, number of connections and UDP / TCP state in the header of the script. Adapt the script to change the options in the header by parameters ($1, $2,...) is simple
 
 **Dependency** (optional but recommended).
 
@@ -17,6 +17,7 @@ file_tmp="/tmp/viewDOS.$(date +%Y_%m_%d-%H_%M_%S).txt"
 ports=":80 \|:443"                     
 
 # IPs that will be ignored and will not be counted (whitelist).
+# Type "NO_filter" if you do not want to ignore any IP.
 ignoreip="127.0.0.1\|localhost"
 
 # Red mark on hosts that have more than X connections.
@@ -66,6 +67,7 @@ ssh -o "StrictHostKeyChecking no" -p 2211 root@domain3.com "$netstat_cmd" >> $fi
  21    | 71.43.188.26    |   US, FL, Florida, Oviedo, 32765, 28.676600, -81.199097, 534, 407                                                                                     
 
  Total unique IPs: 1055  Total connections: 1307
+ IPs not included in the summation: 127.0.0.1, localhost, 213.214.0.21, 212.63.8, 77.76.199
  Filter applied: IP addresses with more than 3 connections.
 
  TOTAL   TCP STATE    PERCENTAGE 
@@ -78,7 +80,9 @@ ssh -o "StrictHostKeyChecking no" -p 2211 root@domain3.com "$netstat_cmd" >> $fi
  79    | CLOSE_WAIT  | 6%         
  1181  | ESTABLISHED | 90%        
 
-
+ Filter 'ignoreip' is not applied here, only 'ports'.
+ 
+ 
  Connections in state/s SYN_RECV
 
  TIMES     IP SOURCE        GEO - INFORMATION          
@@ -93,12 +97,14 @@ ssh -o "StrictHostKeyChecking no" -p 2211 root@domain3.com "$netstat_cmd" >> $fi
  3     | 86.57.158.178   |   BY, 04, Minsk, Minsk, N/A, 53.900002, 27.566700, 0, 0                                                                                               
 
  Total unique IPs: 20  Total connections: 25
+ IPs not included in the summation: 127.0.0.1, localhost, 213.214.0.21, 212.63.8, 77.76.199
 
  Ports used: 80 443 22 
  Filter applied: IP addresses with more than 1 connection and tcp state SYN_RECV.
 
  All netstat outputs are located in /tmp/viewDOS.2014_03_21-01_10_58.txt
 
+ The filter 'ignoreip' is ignored in the section 'Total TCP states'.
  SSH connections to 4 Hosts has delayed 16 seconds.
  Date of execution: thue Mar 31 01:10:58 CEST 2014 
 ```
