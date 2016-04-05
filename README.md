@@ -1,7 +1,7 @@
 # viewDOS
 Simple shellscript to quickly generate an ordered list of all IPs connected to multiple servers in X ports, showing the amount of connections detailed with geolocation. ViewDOS only shows connections and TCP states, no Bandwidth.
 
-It is intended to quickly get a report of suspicious IP addresses of several clusters under different types of DOS attacks. It just connects by SSH to different servers and uses netstat to obtain the desired information. You can filter by IP, port, number of connections and UDP / TCP state in the header of the script. Adapt the script to change the options in the header by parameters ($1, $2,...) is simple
+It is intended to quickly get a report of suspicious IP addresses of several clusters under different types of DOS attacks. It just connects by SSH to different servers and uses netstat to obtain the desired information. You can filter by IP, port, number of connections and UDP / TCP state in the header of the script. Adapting the script to use parameters ($1, $2, ...) instead of the header options is easy.
 
 **Dependency** (optional but recommended).
 
