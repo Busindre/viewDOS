@@ -15,6 +15,7 @@
 ################################ Links ######################################
 #
 # Recommended IPs Blacklist: https://www.blocklist.de/en/export.html
+#                            https://github.com/firehol/blocklist-ipsets
 #
 ############################ Configuration ##################################
 
