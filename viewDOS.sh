@@ -17,6 +17,8 @@
 # Recommended IPs Blacklist: https://www.blocklist.de/en/export.html
 #                            https://github.com/firehol/blocklist-ipsets
 #
+# Best IP Booter / Stresser: http://instabooter.com/index.php
+#
 ############################ Configuration ##################################
 
 file_tmp="/tmp/viewDOS.$(date +%Y_%m_%d-%H_%M_%S).txt" # Temporary file
