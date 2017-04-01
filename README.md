@@ -3,6 +3,16 @@ Simple shellscript to quickly generate an ordered list of all IPs connected to m
 
 It is intended to quickly get a report of suspicious IP addresses of several clusters under different types of DOS attacks. It just connects by SSH to different servers and uses netstat to obtain the desired information. You can filter by IP, port, number of connections and UDP / TCP state in the header of the script. Adapting the script to use parameters ($1, $2, ...) instead of the header options is easy.
 
+**Example**
+
+Suppose a particular online service uses a web cluster composed of ten web servers. If the number of connections to port 443 and 80 starts to grow excessively, the cause must be cleared as quickly as possible.
+
+The origin of the problem is not always a DOS attack, the increase of connections can be due to several things. When a worker did not notify that an SEO campaign (use of crawlers) has been contracted. Performance testing, an implementation of a problematic feature. Monitoring applications with badly configured checks, in short, millions of possible causes.
+
+For example, it is necessary to get a list of all IPs connected to certain  ports, for the web cluster port 80 and 443. With  viewDOS it is very simple and quick to get all the IPs and their number  of connections. In addition it shows information like country of origin of the IP, states TCP of the connections, etc.
+
+The  script will connect via SSH to the 10 web servers in the cluster, get  all the incoming IPs and order them based on their number of  connections. The ssh user as the script location must have access to the target servers. Using an SSH key without passphrase to connect is recommended, especially when it comes to many servers.
+
 **Dependency** (optional but recommended).
 
 Command geoiplookup / [geoip-bin] (http://dev.maxmind.com/geoip/geoip2/geolite2/ "MaxMind’s GeoIP2 databases.")
