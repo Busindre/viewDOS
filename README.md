@@ -60,13 +60,14 @@ tcp_state="SYN_RECV"
 # Multiple TCP states with separate output, check line 132.
 ```
 
-**Add hosts to viewDOS**: Edit Hosts section of the script. (Example with four hosts)
+**Add hosts to viewDOS**: Edit Hosts section of the script. (Example with four hosts).
 ```sh
 ssh user2@domain0.com "$netstat_cmd" >> $file_tmp
 ssh -p 222 root@domain1.com "$netstat_cmd" >> $file_tmp
 ssh -i /opt/keys/id_rsa root@domain2.com "$netstat_cmd" >> $file_tmp
 ssh -o "StrictHostKeyChecking no" -p 2211 root@domain3.com "$netstat_cmd" >> $file_tmpmp
 ```
+NOTE: If we have twenty servers and want to obtain the IPs and number of connections that all the servers receive, it will take twenty ssh commands, one for each server that you want to consult. You can put some of the first ssh commands in the background to speed up the execution of the script.
 
 **Sample viewDOS output**.
 ```sh
