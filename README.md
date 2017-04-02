@@ -16,7 +16,7 @@ The  script will connect via SSH to the 10 web servers in the cluster, get  all 
 The script header contains configuration options for execution. The ssh commands required to connect to the servers must also be included in the header of the script. After configuring your script you can run it as follows.
 ```sh
 chmod a+x viewDOS.sh
-viewDOS.sh
+./viewDOS.sh
 ```
 
 **Dependency** (optional but recommended).
